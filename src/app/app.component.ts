@@ -7,6 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-test';
-  username: string = '';
+  toggle: boolean = false;
+  counter: number = 0;
+  clicksArray: number[] = [];
 
+  onClickDetailsBtn() {
+    this.clicksArray.push(this.counter++);
+    this.toggle = !this.toggle;
+  }
 }

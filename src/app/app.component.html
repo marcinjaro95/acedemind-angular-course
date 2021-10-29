@@ -1,6 +1,11 @@
 <div>
-  <label for="username"></label>
-  <input id="username" type="text" [(ngModel)]="username">
-  <p>The username is: {{ username }}</p>
-  <button [disabled]="!username" (click)="username = ''" class="btn btn-set-username">Reset User</button>
+  <button (click)="onClickDetailsBtn()" class="btn">Display Details</button>
+  <p *ngIf="toggle">Secret password: elephant!</p>
+  <ul>
+    <li *ngFor="let item of clicksArray;"
+      [ngStyle]="{backgroundColor: item >= 5 ? 'blue' : 'white'}"
+      [ngClass]="{'white': item >= 5}">
+      {{item}}
+    </li>
+  </ul>
 </div>
