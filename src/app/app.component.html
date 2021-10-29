@@ -1,5 +1,6 @@
-<div class="container">
-  <app-success-alert></app-success-alert>
-  <div class="spacer"></div>
-  <app-warning-alert></app-warning-alert>
+<div>
+  <label for="username"></label>
+  <input id="username" type="text" [(ngModel)]="username">
+  <p>The username is: {{ username }}</p>
+  <button [disabled]="!username" (click)="username = ''" class="btn btn-set-username">Reset User</button>
 </div>
