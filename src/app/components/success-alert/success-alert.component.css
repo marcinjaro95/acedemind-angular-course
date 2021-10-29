@@ -1,0 +1,15 @@
+.success-alert {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  box-shadow: 0.4em 0.4em 1em grey;
+}
+
+.success-alert-header {
+  color: green;
+  padding-left: 5px;
+}
+
+.success-alert-text {
+  padding-left: 5px;
+}
