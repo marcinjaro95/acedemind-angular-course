@@ -7,12 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-test';
-  toggle: boolean = false;
-  counter: number = 0;
-  clicksArray: number[] = [];
+  evenNumbers: number[] = [];
+  oddNumbers: number[] = [];
 
-  onClickDetailsBtn() {
-    this.clicksArray.push(this.counter++);
-    this.toggle = !this.toggle;
+  onStartClicked(number: number) {
+    console.log(number);
+    if (number % 2 === 0) {
+      this.evenNumbers.push(number);
+    } else {
+      this.oddNumbers.push(number);
+    }
   }
 }

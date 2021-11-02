@@ -1,11 +1,5 @@
 <div>
-  <button (click)="onClickDetailsBtn()" class="btn">Display Details</button>
-  <p *ngIf="toggle">Secret password: elephant!</p>
-  <ul>
-    <li *ngFor="let item of clicksArray;"
-      [ngStyle]="{backgroundColor: item >= 5 ? 'blue' : 'white'}"
-      [ngClass]="{'white': item >= 5}">
-      {{item}}
-    </li>
-  </ul>
+  <app-game-control (startEvent)="onStartClicked($event)"></app-game-control>
+  <app-even *ngFor="let number of evenNumbers;" [evenNumber]="number"></app-even>
+  <app-odd *ngFor="let number of oddNumbers;" [oddNumber]="number"></app-odd>
 </div>
