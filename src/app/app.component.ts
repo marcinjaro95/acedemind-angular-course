@@ -1,21 +1,22 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from "./services/user.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [UserService]
 })
-export class AppComponent {
-  title = 'angular-test';
-  evenNumbers: number[] = [];
-  oddNumbers: number[] = [];
+export class AppComponent implements OnInit {
+  activeUsers: string[] = [];
+  inactiveUsers: string[] = [];
 
-  onStartClicked(number: number) {
-    console.log(number);
-    if (number % 2 === 0) {
-      this.evenNumbers.push(number);
-    } else {
-      this.oddNumbers.push(number);
-    }
+  constructor(private usersService: UserService) {
   }
+
+  ngOnInit() {
+    this.activeUsers = this.usersService.activeUsers;
+    this.inactiveUsers = this.usersService.inactiveUsers;
+  }
+
 }
