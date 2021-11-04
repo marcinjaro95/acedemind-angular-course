@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {FormData} from "../models/form-data";
+import {FormData} from "../../models/form-data";
 
 @Component({
   selector: 'app-form',
