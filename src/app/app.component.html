@@ -1,45 +1,26 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="project_name">Project Name</label>
-          <input
-            formControlName="project_name"
-            id="project_name"
-            type="text"
-            class="form-control">
+      <input type="text" [(ngModel)]="filteredStatus">
+      <br>
+      <button class="btn btn-primary" (click)="onAddServer()">Add Server</button>
+      <br><br>
+      <h2>App Status: {{ appStatus | async}}</h2>
+      <hr>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let server of servers | sort"
+          [ngClass]="getStatusClasses(server)">
           <span
-            *ngIf="!signupForm.get('project_name')?.valid && signupForm.get('project_name')?.touched"
-            class="form-text">
-              <span
-                *ngIf="signupForm.get('project_name')?.errors?.nameIsRestricted">The name is restricted!</span>
-              <span
-                *ngIf="signupForm.get('project_name')?.errors?.required">The name is required!</span>
-            </span>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            formControlName="email"
-            id="email"
-            type="text"
-            class="form-control">
-          <span
-            *ngIf="signupForm.get('email')?.errors?.required">The email is required!</span>
-        </div>
-        <div class="form-check" *ngFor="let projStatus of projectStatuses; let i = index;">
-          <label for="status-{{i}}">
-          <input
-                 formControlName="status"
-                 class="form-check-input"
-                 type="radio"
-                 id="status-{{i}}"
-                 [value]="projStatus">{{projStatus}}
-          </label>
-        </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
-      </form>
+            class="badge">
+            {{ server.status }}
+          </span>
+          <strong>{{ server.name }}</strong> |
+          {{ server.instanceType | uppercase | reverse }} |
+          {{ server.started | date:'fullDate' | uppercase }}
+        </li>
+      </ul>
     </div>
   </div>
 </div>

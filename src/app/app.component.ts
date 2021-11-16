@@ -1,35 +1,57 @@
-import {Component, OnInit} from '@angular/core';
-import {Form, FormControl, FormGroup, Validators} from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import {Servers} from "./models/servers";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  signupForm: FormGroup = new FormGroup({})
-  projectStatuses: string[] = ['Stable', 'Critical', 'Finished'];
-  forbiddenName: string[] = ['Test', 'test'];
-
-  ngOnInit() {
-    this.signupForm = new FormGroup({
-      'project_name': new FormControl(null,[ Validators.required, this.restrictedName.bind(this)]),
-      'email': new FormControl(null, Validators.email),
-      'status': new FormControl(null, Validators.required)
-    })
-  }
-
-  onSubmit() {
-    console.log(this.signupForm.controls);
-  }
-
-  restrictedName(control: FormControl): { [s: string]: boolean} | null {
-    if (this.forbiddenName.indexOf(control.value) !== -1) {
-      return { nameIsRestricted: true }
+export class AppComponent {
+  appStatus = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('stable');
+    }, 2000);
+  });
+  servers: Servers[] = [
+    {
+      instanceType: 'medium',
+      name: 'Production',
+      status: 'stable',
+      started: new Date(15, 1, 2017)
+    },
+    {
+      instanceType: 'large',
+      name: 'User Database',
+      status: 'stable',
+      started: new Date(15, 1, 2017)
+    },
+    {
+      instanceType: 'small',
+      name: 'Development Server',
+      status: 'offline',
+      started: new Date(15, 1, 2017)
+    },
+    {
+      instanceType: 'small',
+      name: 'Testing Environment Server',
+      status: 'stable',
+      started: new Date(15, 1, 2017)
     }
-    return null;
+  ];
+  filteredStatus = '';
+  getStatusClasses(server: {instanceType: string, name: string, status: string, started: Date}) {
+    return {
+      'list-group-item-success': server.status === 'stable',
+      'list-group-item-warning': server.status === 'offline',
+      'list-group-item-danger': server.status === 'critical'
+    };
   }
-
-
-
+  onAddServer() {
+    this.servers.push({
+      instanceType: 'small',
+      name: 'New Server',
+      status: 'stable',
+      started: new Date(15, 1, 2017)
+    });
+  }
 }
